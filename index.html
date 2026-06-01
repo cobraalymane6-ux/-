@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georgina Beauty | جورجينا بيوتي</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* 🎨 الألوان والهوية البصرية الفخمة للمتجر */
+        :root {
+            --primary-glow: linear-gradient(135deg, #ff007f, #7928ca);
+            --luxury-bg: linear-gradient(135deg, #120a18, #2a1435);
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text-main: #f5f5f7;
+            --text-muted: #a1a1a6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--luxury-bg);
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* ✨ تأثير الخلفية المتحركة الفخمة */
+        .bg-glow {
+            position: fixed; width: 300px; height: 300px; background: #7928ca; filter: blur(150px); opacity: 0.3; border-radius: 50%; pointer-events: none; z-index: -1; animation: floatGlow 8s infinite alternate;
+        }
+        @keyframes floatGlow {
+            0% { top: 10%; left: 10%; }
+            100% { top: 60%; left: 70%; }
+        }
+
+        /* 👑 الهيدر العلوي بنمط زجاجي (Glassmorphism) */
+        .header {
+            position: sticky; top: 0; background: rgba(26, 12, 34, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .logo {
+            font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #fff, #dfa5ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; user-select: none;
+        }
+        .header-icons { display: flex; gap: 15px; align-items: center; }
+        .icon-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; transition: all 0.3s; position: relative; }
+        .icon-btn:hover { background: var(--primary-glow); transform: scale(1.05); }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: #ff0055; color: white; font-size: 11px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+        /* 🗂 شريط التصنيفات العلوي المنسق */
+        .categories-scroll {
+            display: flex; gap: 12px; padding: 15px 20px; overflow-x: auto; scrollbar-width: none;
+        }
+        .categories-scroll::-webkit-scrollbar { display: none; }
+        .cat-item { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: all 0.3s; }
+        .cat-item.active, .cat-item:hover { background: var(--primary-glow); color: white; border-color: transparent; box-shadow: 0 4px 15px rgba(255,0,127,0.3); }
+        /* 🛍️ ستايل شبكة المنتجات والكروت الزجاجية */
+        .products-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 0 20px 20px 20px;
+        }
+        .product-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 12px; display: flex; flex-direction: column; position: relative; transition: all 0.3s ease; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .product-card:hover { transform: translateY(-5px); border-color: rgba(255,0,127,0.4); box-shadow: 0 10px 25px rgba(121,40,202,0.2); }
+        .product-img { width: 100%; aspect-ratio: 1; border-radius: 18px; object-fit: cover; margin-bottom: 10px; background: rgba(0,0,0,0.2); }
+        .product-badge { position: absolute; top: 18px; right: 18px; background: linear-gradient(135deg, #ff0055, #ff5500); color: white; font-size: 10px; font-weight: bold; padding: 4px 8px; border-radius: 10px; }
+        .product-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 5px; line-height: 1.4; }
+        .product-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 32px; }
+        .price-container { display: flex; flex-direction: column; margin-top: auto; }
+        .old-price { font-size: 11px; color: #ff4545; text-decoration: line-through; margin-bottom: 2px; }
+        .new-price { font-size: 15px; font-weight: 700; color: #00ffcc; }
+        .add-to-cart-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); color: white; border-radius: 14px; padding: 8px; margin-top: 10px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
+        .product-card:hover .add-to-cart-btn { background: var(--primary-glow); border-color: transparent; box-shadow: 0 4px 12px rgba(255,0,127,0.2); }
+
+        /* 🛒 نافذة السلة الجانبية الفخمة */
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%; background: rgba(20, 10, 26, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.5); border-left: 1px solid var(--glass-border); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column; }
+        .cart-sidebar.open { right: 0; }
+        .cart-header { padding: 20px; border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; }
+        .cart-title { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .close-cart { font-size: 20px; cursor: pointer; color: var(--text-muted); transition: color 0.2s; }
+        .close-cart:hover { color: white; }
+        .cart-items-container { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .cart-item-row { display: flex; gap: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 10px; border-radius: 16px; align-items: center; }
+        .cart-item-img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; }
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+        .cart-item-price { font-size: 13px; color: #00ffcc; font-weight: bold; }
+        .cart-item-qty { font-size: 11px; color: var(--text-muted); }
+        .remove-item-btn { color: #ff4545; background: none; border: none; cursor: pointer; font-size: 16px; padding: 5px; }
+        .cart-footer { padding: 20px; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.2); }
+        .total-price-box { display: flex; justify-content: space-between; align-items: center; font-size: 16px; font-weight: 700; margin-bottom: 15px; }
+        .checkout-btn { width: 100%; background: var(--primary-glow); color: white; border: none; border-radius: 16px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 20px rgba(255,0,127,0.3); transition: transform 0.2s; text-decoration: none; }
+        .checkout-btn:hover { transform: translateY(-2px); }
+
+        /* 📱 شريط التنقل السفلي الذكي الجديد (بدون أيقونة الحساب) */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: rgba(26, 12, 34, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--glass-border); box-shadow: 0 -4px 20px rgba(0,0,0,0.3); display: flex; justify-content: space-around; align-items: center; z-index: 1500;
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; font-size: 11px; font-weight: bold; cursor: pointer; transition: all 0.2s; width: 33%; height: 100%;
+        }
+        .nav-item.active, .nav-item:hover { color: #ff007f; }
+        .nav-icon { font-size: 20px; margin-bottom: 2px; transition: transform 0.2s; }
+        .nav-item:hover .nav-icon { transform: translateY(-3px); }
+
+        /* 📳 النافذة المنبثقة الزجاجية الفخمة للتواصل */
+        .contact-modal { 
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(30, 15, 40, 0.95); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); width: 90%; max-width: 380px; padding: 25px; z-index: 2500; border: 1px solid var(--glass-border); backdrop-filter: blur(20px); opacity: 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .contact-modal.show { opacity: 1; transform: translate(-50%, -50%) scale(1); display: block; }
+        .contact-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 2499; }
+        
+        .contact-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; border: none; padding: 12px; width: 100%; border-radius: 14px; font-weight: bold; cursor: pointer; margin-top: 10px; text-decoration: none; font-size: 14px; box-shadow: 0 4px 12px rgba(37,211,102,0.2); transition: all 0.2s; }
+        .contact-btn:hover { transform: translateY(-2px); }
+        .btn-channel { background: linear-gradient(135deg, #0088cc, #2ca5e0); box-shadow: 0 4px 12px rgba(0,136,204,0.2); }
+
+        /* 🔒 لوحة تحكم الإدارة السرية الناشئة */
+        .admin-panel { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a0c22; border: 1px solid #ff007f; padding: 25px; border-radius: 24px; z-index: 3000; width: 90%; max-width: 450px; box-shadow: 0 0 30px rgba(255,0,127,0.4); }
+        .admin-panel.open { display: block; }
+        .admin-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 12px; border-radius: 12px; color: white; margin-bottom: 12px; font-size: 14px; }
+        .admin-btn { width: 100%; background: var(--primary-glow); color: white; border: none; padding: 12px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header class="header">
+        <div class="logo" onclick="checkAdminClick()">Georgina Beauty ✨</div>
+        <div class="header-icons">
+            <button class="icon-btn" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <div style="padding: 20px 20px 5px 20px;">
+        <div style="position: relative; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 16px; padding: 12px 15px; display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-search" style="color: var(--text-muted); font-size: 14px;"></i>
+            <input type="text" id="searchInput" oninput="searchProducts()" placeholder="ابحثي عن منتجاتك المفضلـة..." style="background: none; border: none; color: white; width: 100%; outline: none; font-size: 14px; font-family: 'Cairo', sans-serif;">
+        </div>
+    </div>
+
+    <div class="categories-scroll">
+        <div class="cat-item active" onclick="filterCategory('all', this)">المجموع الكل</div>
+        <div class="cat-item" onclick="filterCategory('makeup', this)">مكياج وعناية</div>
+        <div class="cat-item" onclick="filterCategory('perfume', this)">عطور فخمة</div>
+        <div class="cat-item" onclick="filterCategory('accessories', this)">إكسسوارات</div>
+    </div>
+
+    <main class="products-grid" id="productsGrid">
+        </main>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <div class="cart-title">
+                <i class="fas fa-shopping-bag" style="color: #ff007f;"></i>
+                <span>حقيبة الطلبات</span>
+            </div>
+            <i class="fas fa-times close-cart" onclick="toggleCart()"></i>
+        </div>
+        <div class="cart-items-container" id="cartItemsContainer">
+            </div>
+        <div class="cart-footer">
+            <div class="total-price-box">
+                <span>إجمالي الحساب:</span>
+                <span id="totalPrice">0 ريال</span>
+            </div>
+            <a href="#" id="whatsappCheckoutBtn" target="_blank" class="checkout-btn">
+                <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+                <span>إتمام الشراء عبر الواتساب</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <span class="nav-icon">🏠</span>
+            <span>الرئيسية</span>
+        </div>
+        <div class="nav-item" onclick="toggleCart()">
+            <span class="nav-icon">🛒</span>
+            <span>السلة</span>
+        </div>
+        <div class="nav-item" onclick="openContactModal()">
+            <span class="nav-icon">✨</span> <span>تواصل معنا</span>
+        </div>
+    </div>
+
+    <div class="contact-overlay" id="contactOverlay" onclick="closeContactModal()"></div>
+    <div class="contact-modal" id="contactModal">
+        <h3 style="text-align: center; margin-top: 0; color: #fff; font-size: 18px; margin-bottom: 10px;">✨ قنوات التواصل الرسمية ✨</h3>
+        <p style="text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">يسعدنا تواصلكم معنا للاستفسار والطلب الفوري:</p>
+        
+        <a href="https://wa.me/967779796832" target="_blank" class="contact-btn">
+            <i class="fab fa-whatsapp"></i> واتساب المالك (779796832)
+        </a>
+        <a href="https://wa.me/967775664908" target="_blank" class="contact-btn" style="background: #128C7E; box-shadow: 0 4px 12px rgba(18,140,126,0.2);">
+            <i class="fab fa-whatsapp"></i> المالك الثاني (775664908)
+        </a>
+        
+        <a href="https://chat.whatsapp.com/IKBSBNwfWz7GJidvSojwUY" target="_blank" class="contact-btn btn-channel">
+            <i class="fas fa-users"></i> الانضمام لجروب الواتساب
+        </a>
+        <a href="https://chat.whatsapp.com/IKBSBNwfWz7GJidvSojwUY" target="_blank" class="contact-btn" style="background: linear-gradient(135deg, #b83280, #e6683c); box-shadow: 0 4px 12px rgba(184,50,128,0.2);">
+            <i class="fas fa-bullhorn"></i> قناة الواتساب الرسمية
+        </a>
+        
+        <button onclick="closeContactModal()" style="width: 100%; margin-top: 20px; padding: 12px; border-radius: 14px; border: none; background: rgba(255,255,255,0.05); color: var(--text-main); font-weight: bold; cursor: pointer; transition: background 0.2s;">إغلاق النافذة</button>
+    </div>
+
+    <div class="contact-overlay" id="adminOverlay" onclick="closeAdminPanel()"></div>
+    <div class="admin-panel" id="adminPanel">
+        <h3 style="color: white; margin-bottom: 15px; text-align: center;">🔒 لوحة تحكم المالك السحرية</h3>
+        <input type="password" id="adminPassword" class="admin-input" placeholder="أدخل رمز المالك السري...">
+        <button onclick="verifyAdminPassword()" class="admin-btn">تسجيل الدخول</button>
+        
+        <div id="adminControls" style="display: none; margin-top: 20px; border-top: 1px solid var(--glass-border); padding-top: 15px;">
+            <h4 style="color: #00ffcc; margin-bottom: 10px;">➕ إضافة منتج جديد:</h4>
+            <input type="text" id="pTitle" class="admin-input" placeholder="اسم المنتج...">
+            <input type="text" id="pDesc" class="admin-input" placeholder="وصف قصير للمنتج...">
+            <input type="number" id="pOldPrice" class="admin-input" placeholder="السعر قبل الخصم...">
+            <input type="number" id="pNewPrice" class="admin-input" placeholder="السعر الحالي بالريال...">
+            <input type="text" id="pImg" class="admin-input" placeholder="رابط صورة المنتج...">
+            <select id="pCat" class="admin-input" style="color: white;">
+                <option value="makeup">مكياج وعناية</option>
+                <option value="perfume">عطور فخمة</option>
+                <option value="accessories">إكسسوارات</option>
+            </select>
+            <button onclick="addNewProductFromPanel()" class="admin-btn" style="background: #00ffcc; color: #120a18;">حفظ ونشر المنتج فوراً</button>
+        </div>
+        <button onclick="closeAdminPanel()" class="admin-btn" style="background: none; border: 1px solid var(--glass-border); color: var(--text-muted); margin-top: 10px;">إلغلاق</button>
+    </div>
+    <script>
+        // 📦 قاعدة البيانات الافتراضية للمنتجات (تظهر تلقائياً عند فتح الموقع)
+        let products = [
+            { id: 1, title: "عطر الجوهرة الفخم", desc: "ثبات عالي ورائحة ملكية تدوم طويلاً لكل المناسبات.", oldPrice: 280, newPrice: 180, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500", cat: "perfume" },
+            { id: 2, title: "مجموعة العناية المتكاملة", desc: "سيروم النضارة وكريم الترطيب العميق من مستخلصات طبيعية.", oldPrice: 25000, newPrice: 19000, img: "https://images.unsplash.com/photo-1608248597481-496100c8c836?w=500", cat: "makeup" },
+            { id: 3, title: "ساعة ذكية ألترا جيل 5", desc: "مقاومة للماء، تدعم المكالمات والتنبيهات، شاشة عالية الدقة.", oldPrice: 28000, newPrice: 18000, img: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=500", cat: "accessories" }
+        ];
+
+        let cart = [];
+        let adminClickCount = 0;
+
+        // 🛍️ دالة عرض المنتجات في الشبكة الزجاجية
+        function renderProducts(productsList) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = "";
+            
+            if(productsList.length === 0) {
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px; font-size: 14px;">لا توجد منتجات مطابقة لبحثك حالياً...</p>`;
+                return;
+            }
+
+            productsList.forEach(p => {
+                let badgeHTML = p.oldPrice ? `<span class="product-badge">خصم حصرّي</span>` : '';
+                let oldPriceHTML = p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString()} ريال</span>` : '';
+                
+                grid.innerHTML += `
+                    <div class="product-card">
+                        ${badgeHTML}
+                        <img src="${p.img}" class="product-img" alt="${p.title}">
+                        <h3 class="product-title">${p.title}</h3>
+                        <p class="product-desc">${p.desc}</p>
+                        <div class="price-container">
+                            ${oldPriceHTML}
+                            <span class="new-price">${p.newPrice.toLocaleString()} ريال</span>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart(${p.id})">
+                            <i class="fas fa-shopping-basket"></i> إضافة للسلة
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        // 🔍 دالة الفلترة والتصنيفات
+        function filterCategory(category, element) {
+            document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+            
+            if(category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.cat === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // 🔎 دالة البحث الفوري الذكي
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // 🛒 دالات إدارة سلة المشتريات وحساب الإجمالي
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const cartItem = cart.find(item => item.id === id);
+            
+            if(cartItem) {
+                cartItem.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCart();
+            
+            // تأثير حركي خفيف للتأكيد
+            let badge = document.getElementById('cartBadge');
+            badge.style.transform = "scale(1.3)";
+            setTimeout(() => { badge.style.transform = "scale(1)"; }, 200);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        function updateCart() {
+            const container = document.getElementById('cartItemsContainer');
+            container.innerHTML = "";
+            let total = 0;
+            let totalQty = 0;
+
+            cart.forEach(item => {
+                total += item.newPrice * item.qty;
+                totalQty += item.qty;
+                
+                container.innerHTML += `
+                    <div class="cart-item-row">
+                        <img src="${item.img}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.title}</div>
+                            <div class="cart-item-price">${(item.newPrice * item.qty).toLocaleString()} ريال</div>
+                            <div class="cart-item-qty">الكمية: ${item.qty}</div>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeFromCart(${item.id})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cartBadge').innerText = totalQty;
+            document.getElementById('totalPrice').innerText = total.toLocaleString() + " ريال";
+            
+            // تحديث رابط الشراء عبر الواتساب ليضم محتويات السلة بدقة
+            let message = "مرحباً جورجينا بيوتي، أود طلب المنتجات التالية:\n\n";
+            cart.forEach((item, index) => {
+                message += `${index + 1}- ${item.title} (الكمية: ${item.qty}) - السعر: ${(item.newPrice * item.qty).toLocaleString()} ريال\n`;
+            });
+            message += `\n💰 الإجمالي الكلي: ${total.toLocaleString()} ريال اليمني`;
+            
+            document.getElementById('whatsappCheckoutBtn').href = `https://wa.me/967779796832?text=${encodeURIComponent(message)}`;
+        }
+
+        // 📳 دالات نافذة التواصل المنبثقة المحدثة
+        function openContactModal() {
+            document.getElementById('contactOverlay').style.display = "block";
+            let modal = document.getElementById('contactModal');
+            modal.style.display = "block";
+            setTimeout(() => { modal.classList.add('show'); }, 10);
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('show');
+            setTimeout(() => { 
+                document.getElementById('contactOverlay').style.display = "none"; 
+                document.getElementById('contactModal').style.display = "none"; 
+            }, 300);
+        }
+
+        // 🔒 نظام الحماية والفتح السري للوحة تحكم المالك
+        function checkAdminClick() {
+            adminClickCount++;
+            if(adminClickCount === 5) {
+                adminClickCount = 0;
+                document.getElementById('adminOverlay').style.display = "block";
+                document.getElementById('adminPanel').classList.add('open');
+            }
+            // تصفير العداد بعد 3 ثواني إن لم يكمل الضغطات
+            setTimeout(() => { adminClickCount = 0; }, 3000);
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('adminOverlay').style.display = "none";
+            document.getElementById('adminPanel').classList.remove('open');
+            document.getElementById('adminPassword').value = "";
+        }
+
+        function verifyAdminPassword() {
+            const pass = document.getElementById('adminPassword').value;
+            // الرمز السري الخاص بالمالك
+            if(pass === "3366633") {
+                document.getElementById('adminControls').style.display = "block";
+                alert("🔓 تم التحقق بنجاح! تم فتح صلاحيات الإضافة الفورية.");
+            } else {
+                alert("❌ الرمز السري خاطئ! يرجى المحاولة مجدداً.");
+            }
+        }
+
+        function addNewProductFromPanel() {
+            const title = document.getElementById('pTitle').value;
+            const desc = document.getElementById('pDesc').value;
+            const oldPrice = parseFloat(document.getElementById('pOldPrice').value) || 0;
+            const newPrice = parseFloat(document.getElementById('pNewPrice').value);
+            const img = document.getElementById('pImg').value || "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500";
+            const cat = document.getElementById('pCat').value;
+
+            if(!title || !newPrice) {
+                alert("⚠️ يرجى تعبئة اسم المنتج والسعر الحالي على الأقل!");
+                return;
+            }
+
+            const newProduct = {
+                id: products.length + 1,
+                title: title,
+                desc: desc,
+                oldPrice: oldPrice,
+                newPrice: newPrice,
+                img: img,
+                cat: cat
+            };
+
+            products.unshift(newProduct); // إضافته في البداية ليظهر أولاً
+            renderProducts(products);
+            closeAdminPanel();
+            alert("✨ تم نشر المنتج بنجاح وظهوره في الموقع فوراً!");
+            
+            // تصفير الخانات
+            document.getElementById('pTitle').value = "";
+            document.getElementById('pDesc').value = "";
+            document.getElementById('pOldPrice').value = "";
+            document.getElementById('pNewPrice').value = "";
+            document.getElementById('pImg').value = "";
+        }
+
+        // تشغيل المنتجات عند التحميل لأول مرة تلقائياً
+        window.onload = function() {
+            renderProducts(products);
+        };
+    </script>
+
+</body>
+</html>
